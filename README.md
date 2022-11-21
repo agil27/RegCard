@@ -12,6 +12,13 @@ Learned Cardinalities Estimation with Regularities
     python3 reg/data_gen.py -d workloads -f job-cmp-mini
     ```
 
+    Alternatively we can also try `job-cmp-light` and `job-cmp`, which are much larger.
+    
+    ```bash
+    python3 reg/data_gen.py -d workloads -f job-cmp-light
+    python3 reg/data_gen.py -d workloads -f job-cmp
+    ```
+
     This will also create the sampled materialized table view for each of the tables.
 
 2. Training and Evaluation
@@ -19,7 +26,7 @@ Learned Cardinalities Estimation with Regularities
     Then we run the training with the bitmaps. This part is credited to [Thomas Kipf, et al.](https://github.com/andreaskipf/learnedcardinalities)
 
     ```bash
-    python3 train.py job-cmp-mini-card --cmp workloads/job-cmp-mini-card-pairs.csv
+    python3 train.py job-cmp-mini-card --cmp
     ```
 
     We added extra evaluation for the **monotonicity** by introducing the relative partial order labels in `job-cmp-mini-card-pairs.csv`. We will utilize it to calculate the obeying rate.
@@ -40,8 +47,7 @@ Learned Cardinalities Estimation with Regularities
 
 ## Results
 
-On `job-cmp-mini` dataset we created:
-
+Train / Eval
 ```
 Q-Error training set:
 Median: 9.035106910996845
@@ -58,7 +64,11 @@ Median: 8.102225041004711
 99th percentile: 1081.6639247096732
 Max: 103861.0
 Mean: 179.64540903871588
+```
 
+On `job-cmp-mini` dataset we created:
+
+```
 Loaded queries
 Loaded bitmaps
 Number of test samples: 186
@@ -73,17 +83,21 @@ Max: 6189.0
 Mean: 1068.9164904381933
 
 MonoM job-cmp-mini-card:
- Median: 1.0
- 90th percentile: 1.0
- 95th percentile: 1.0
- 99th percentile: 1.0
- Max: 1
- Mean: 0.9470588235294117
+Median: 1.0
+90th percentile: 1.0
+95th percentile: 1.0
+99th percentile: 1.0
+Max: 1
+Mean: 0.9470588235294117
+```
+
+On `job-cmp-light` dataset
+```
 ```
 
 ## TODOs
 
 - [x] fix `python data_gen.py`, will throw error on 59it.
-- [ ] generate files in multithreads, which would be faster
+- [x] generate files in `multiprocess`, which would be faster utilizing 8 cores of the CPU
 - [x] generate a list of queries for monotonicity evaluation, and generate a list of comparisons that look like `i > j` or `i = 0` to compare row $i$ and row $j$.
 - [x] serialize / persist the table view used to generate bitmaps
