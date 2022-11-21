@@ -9,6 +9,7 @@ from torch.utils.data import DataLoader
 from mscn.util import *
 from mscn.data import get_train_datasets, load_data, make_dataset
 from mscn.model import SetConv
+from reg.cmp import print_monom
 
 
 def unnormalize_torch(vals, min_val, max_val):
@@ -72,7 +73,7 @@ def print_qerror(preds_unnorm, labels_unnorm):
     print("Mean: {}".format(np.mean(qerror)))
 
 
-def train_and_predict(workload_name, num_queries, num_epochs, batch_size, hid_units, cuda):
+def train_and_predict(workload_name, num_queries, num_epochs, batch_size, hid_units, cuda, cmp_file=None):
     # Load training and validation data
     num_materialized_samples = 1000
     dicts, column_min_max_vals, min_val, max_val, labels_train, labels_test, max_num_joins, max_num_predicates, train_data, test_data = get_train_datasets(
@@ -169,6 +170,11 @@ def train_and_predict(workload_name, num_queries, num_epochs, batch_size, hid_un
     print("\nQ-Error " + workload_name + ":")
     print_qerror(preds_test_unnorm, label)
 
+    # Print MonoM score
+    if cmp_file:
+        print("\nMonoM " + workload_name + ":")
+        print_monom(preds_test_unnorm, cmp_file)
+
     # Write predictions
     file_name = "results/predictions_" + workload_name + ".csv"
     os.makedirs(os.path.dirname(file_name), exist_ok=True)
@@ -185,8 +191,9 @@ def main():
     parser.add_argument("--batch", help="batch size (default: 1024)", type=int, default=1024)
     parser.add_argument("--hid", help="number of hidden units (default: 256)", type=int, default=256)
     parser.add_argument("--cuda", help="use CUDA", action="store_true")
+    parser.add_argument("--cmp", type=str, default=None, help="compare pairs file")
     args = parser.parse_args()
-    train_and_predict(args.testset, args.queries, args.epochs, args.batch, args.hid, args.cuda)
+    train_and_predict(args.testset, args.queries, args.epochs, args.batch, args.hid, args.cuda, args.cmp)
 
 
 if __name__ == "__main__":

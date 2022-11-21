@@ -29,6 +29,8 @@ def load_data(file_name, num_materialized_samples):
 
     # depricated
     # num_bytes_per_bitmap = int((num_materialized_samples + 7) >> 3)
+
+    # the following is modified by Yuanbioa
     with open(file_name + ".bitmaps", 'rb') as f:
         samples = pickle.load(f)
     samples = [np.unpackbits(s, axis=1) for s in samples]

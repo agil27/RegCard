@@ -72,10 +72,12 @@ def gen_bitmaps_and_cardinalities(filename, bitmap_only=False, directory='worklo
             print(e)
             cursor.execute('ABORT;')
 
+    cmp_pairs = np.array(pd.read_csv(os.path.join(directory, filename + '-pairs.csv'), header=None)[0])
     workload_bitmaps = []
     workload_queries = []
+    workload_pairs = []
 
-    for _, row in tqdm(df.iterrows(), desc='iterating rows...'):
+    for i, row in tqdm(df.iterrows(), desc='iterating rows...'):
         # generate bitmaps
         try:
             row_bitmap = get_bitmap(row)
@@ -86,16 +88,18 @@ def gen_bitmaps_and_cardinalities(filename, bitmap_only=False, directory='worklo
             cursor.execute('ABORT;')
             continue
         else:
-            workload_bitmaps.append(row_bitmap)
-            if not bitmap_only:
-                workload_queries.append(list(row) + [row_card])
+            if row_card > 0:
+                workload_bitmaps.append(row_bitmap)
+                workload_pairs.append(cmp_pairs[i])
+                if not bitmap_only:
+                    workload_queries.append(list(row) + [row_card])
 
     # save it
-    with open(os.path.join(directory, '%s.bitmaps' % (filename, )), 'wb') as f:
+    with open(os.path.join(directory, '%s-card.bitmaps' % (filename, )), 'wb') as f:
         pickle.dump(workload_bitmaps, f)
     if not bitmap_only:     
         pd.DataFrame(workload_queries).to_csv(os.path.join(directory, '%s-card.csv' % (filename, )), sep='#', header=None, index=False)
-        
+    pd.Series(workload_pairs).to_csv(os.path.join(directory, '%s-card-pair.csv' % (filename, )), header=None, index=False)   
 
 def main():
     parser = argparse.ArgumentParser()
