@@ -21,9 +21,14 @@ def get_bitmap(row):
     tables = row[0].split(',')
     table_abbrs = [t.split(' ')[1] for t in tables]
     predicates = row[2]
+    all_bitmaps = np.zeros((len(table_abbrs), 1000), dtype=int)
+
+    # if no predicates on table
+    if not isinstance(predicates, list):
+        return np.packbits(all_bitmaps, axis=1)
+
     predicates = predicates.split(',')
     num_predicates = len(predicates) // 3
-    all_bitmaps = np.zeros((len(table_abbrs), 1000), dtype=int)
     for i in range(num_predicates):
         p = ''.join(predicates[3 * i : 3 * i + 3])
         table_abbr = predicates[3 * i].split('.')[0]
@@ -49,8 +54,8 @@ def get_cardinality(row):
     return card
 
 
-def gen_bitmaps_and_cardinalities(filename, bitmap_only=False):
-    df = pd.read_csv(os.path.join('workloads', filename + '.csv'), sep='#', header=None)
+def gen_bitmaps_and_cardinalities(filename, bitmap_only=False, directory='workloads'):
+    df = pd.read_csv(os.path.join(directory, filename + '.csv'), sep='#', header=None)
 
     all_tables = []
     for tables in df[0]:
@@ -82,20 +87,23 @@ def gen_bitmaps_and_cardinalities(filename, bitmap_only=False):
             continue
         else:
             workload_bitmaps.append(row_bitmap)
-            workload_queries.append(list(row) + [row_card])
-            # save it
-            with open('workloads/%s.bitmaps' % filename, 'wb') as f:
-                pickle.dump(workload_bitmaps, f)
-            
-            pd.DataFrame(workload_queries).to_csv('workloads/%s_card.csv' % filename, sep='#', header=None, index=False)
+            if not bitmap_only:
+                workload_queries.append(list(row) + [row_card])
+
+    # save it
+    with open(os.path.join(directory, '%s.bitmaps' % (filename, )), 'wb') as f:
+        pickle.dump(workload_bitmaps, f)
+    if not bitmap_only:     
+        pd.DataFrame(workload_queries).to_csv(os.path.join(directory, '%s_card.csv' % (filename, )), sep='#', header=None, index=False)
         
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument('-d', '--dir', type=str, default='workloads', help='directory to store the data')
     parser.add_argument('-f', '--file', type=str, default='job-light', help='path to the csv file')
     parser.add_argument('-b', '--bitmap_only', action='store_true', help='whether to only generate the bitmap (without the cardinality)')
     args = parser.parse_args()
-    gen_bitmaps_and_cardinalities(args.file, args.bitmap_only)
+    gen_bitmaps_and_cardinalities(args.file, args.bitmap_only, args.dir)
     
 
 if __name__ == '__main__':

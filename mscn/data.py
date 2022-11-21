@@ -22,7 +22,7 @@ def load_data(file_name, num_materialized_samples):
             if int(row[3]) < 1:
                 print("Queries must have non-zero cardinalities")
                 exit(1)
-            # label.append(row[3])
+            label.append(row[3])
     print("Loaded queries")
 
     # Load bitmaps
@@ -33,9 +33,6 @@ def load_data(file_name, num_materialized_samples):
         samples = pickle.load(f)
     samples = [np.unpackbits(s, axis=1) for s in samples]
     print("Loaded bitmaps")
-
-    # load labels
-    label = np.load(file_name + ".cards")
     
     # Split predicates
     predicates = [list(chunks(d, 3)) for d in predicates]
