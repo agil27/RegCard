@@ -42,9 +42,10 @@ def get_cardinality(row):
     num_predicates = len(predicates) // 3
     predicates = ' AND '.join([''.join(predicates[3 * i: 3 * i + 3]) for i in range(num_predicates)])
     get_card = 'SELECT COUNT(*) FROM %s WHERE %s AND %s;' % (tables, join_predicates, predicates)
-    print(get_card)
+    # print(get_card)
     cursor.execute(get_card)
     card = cursor.fetchone()
+    card = int(card[0])
     return card
 
 
@@ -66,18 +67,28 @@ def gen_bitmaps_and_cardinalities(filename, bitmap_only=False):
             print(e)
             cursor.execute('ABORT;')
 
-    # generate bitmaps
-    workload_bitmaps = [get_bitmap(row) for i, row in tqdm(df.iterrows(), desc='generating bitmaps...')]
+    workload_bitmaps = []
+    workload_queries = []
 
-    # save it
-    with open('workloads/%s.bitmaps' % filename, 'wb') as f:
-        pickle.dump(workload_bitmaps, f)
-
-    # cardinalities
-    if not bitmap_only:
-        workload_cards = [get_cardinality(row) for i, row in tqdm(df.iterrows(), desc='generating true cardinalities...')]
-        np.save('workloads/%s.cards' % filename, workload_cards)
-
+    for _, row in tqdm(df.iterrows(), desc='iterating rows...'):
+        # generate bitmaps
+        try:
+            row_bitmap = get_bitmap(row)
+            if not bitmap_only:
+                row_card = get_cardinality(row)
+        except Exception as e:
+            print(e)
+            cursor.execute('ABORT;')
+            continue
+        else:
+            workload_bitmaps.append(row_bitmap)
+            workload_queries.append(list(row) + [row_card])
+            # save it
+            with open('workloads/%s.bitmaps' % filename, 'wb') as f:
+                pickle.dump(workload_bitmaps, f)
+            
+            pd.DataFrame(workload_queries).to_csv('workloads/%s_card.csv' % filename, sep='#', header=None, index=False)
+        
 
 def main():
     parser = argparse.ArgumentParser()
