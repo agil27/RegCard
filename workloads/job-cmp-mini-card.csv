@@ -1,73 +1,186 @@
-movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1961,t.production_year,<,2010#21
-movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1926,t.production_year,<,1993#5
-title t,movie_info mi,movie_info_idx mi_idx,movie_companies mc#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=mc.movie_id#mi_idx.info_type_id,=,101,mi.info_type_id,=,3,t.production_year,>,1899,t.production_year,<,2013,mc.company_type_id,=,2#807788
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1947,t.production_year,<,1970#37073
-cast_info ci,title t#t.id=ci.movie_id#t.production_year,>,2014,t.production_year,<,2020#3099
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1930,t.production_year,<,1988#158504
-title t,movie_info mi,movie_info_idx mi_idx,cast_info ci#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=ci.movie_id#mi.info_type_id,=,3,mi_idx.info_type_id,=,101,t.production_year,>,1995,t.production_year,<,2015#9797047
-title t,movie_info mi,movie_info_idx mi_idx,cast_info ci#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=ci.movie_id#mi.info_type_id,=,3,mi_idx.info_type_id,=,101,t.production_year,>,1959,t.production_year,<,1965#324035
-title t,movie_info mi,movie_info_idx mi_idx,cast_info ci#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=ci.movie_id#mi.info_type_id,=,3,mi_idx.info_type_id,=,101,t.production_year,>,1890,t.production_year,<,1942#834664
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1870,t.production_year,<,1931#12699
-title t,movie_keyword mk,movie_companies mc#t.id=mk.movie_id,t.id=mc.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1981,t.production_year,<,1987#685
-title t,movie_info mi,movie_companies mc,cast_info ci#t.id=mi.movie_id,t.id=mc.movie_id,t.id=ci.movie_id#ci.role_id,=,2,mi.info_type_id,=,16,t.production_year,>,1968,t.production_year,<,2014#121941846
-title t,movie_info mi,movie_info_idx mi_idx,movie_companies mc#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=mc.movie_id#mi_idx.info_type_id,=,101,mi.info_type_id,=,3,t.production_year,>,1907,t.production_year,<,2013,mc.company_type_id,=,2#805401
-movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1928,t.production_year,<,1972#2
-cast_info ci,title t#t.id=ci.movie_id#t.production_year,>,1958,t.production_year,<,1962#405906
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1875,t.production_year,<,2020#776346
-cast_info ci,title t#t.id=ci.movie_id#t.production_year,>,1901,t.production_year,<,1994#10224624
-cast_info ci,title t,movie_companies mc#t.id=ci.movie_id,t.id=mc.movie_id#t.production_year,>,1892,t.production_year,<,1973,ci.role_id,=,2#2247907
-title t,movie_info mi,movie_companies mc,cast_info ci#t.id=mi.movie_id,t.id=mc.movie_id,t.id=ci.movie_id#ci.role_id,=,2,mi.info_type_id,=,16,t.production_year,>,1945,t.production_year,<,2021#128600789
-title t,movie_info mi,movie_companies mc,movie_keyword mk#t.id=mi.movie_id,t.id=mk.movie_id,t.id=mc.movie_id#mi.info_type_id,=,16,t.production_year,>,1966#701953453
-title t,movie_info mi,movie_info_idx mi_idx,movie_companies mc#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=mc.movie_id#mi_idx.info_type_id,=,101,mi.info_type_id,=,3,t.production_year,>,1931,t.production_year,<,1986,mc.company_type_id,=,2#193888
-title t,movie_keyword mk,movie_companies mc#t.id=mk.movie_id,t.id=mc.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1902,t.production_year,<,1967#2626
-cast_info ci,title t#t.id=ci.movie_id#t.production_year,>,1901,t.production_year,<,1995#10691170
-title t,movie_info mi,movie_info_idx mi_idx,movie_companies mc#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=mc.movie_id#mi_idx.info_type_id,=,101,mi.info_type_id,=,3,t.production_year,>,1877,t.production_year,<,2011,mc.company_type_id,=,2#743743
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1929,t.production_year,<,2013#751550
-cast_info ci,title t#t.id=ci.movie_id#t.production_year,>,1892,t.production_year,<,1921#355494
-title t,movie_info mi,movie_companies mc,movie_keyword mk#t.id=mi.movie_id,t.id=mk.movie_id,t.id=mc.movie_id#mi.info_type_id,=,16,t.production_year,>,1917,t.production_year,<,2016#753527711
-title t,movie_info mi,movie_companies mc,movie_keyword mk#t.id=mi.movie_id,t.id=mk.movie_id,t.id=mc.movie_id#mi.info_type_id,=,16,t.production_year,>,1878,t.production_year,<,1961#41443931
-title t,movie_info mi,movie_info_idx mi_idx,movie_companies mc#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=mc.movie_id#mi_idx.info_type_id,=,101,mi.info_type_id,=,3,t.production_year,>,1871,t.production_year,<,2011,mc.company_type_id,=,2#743743
-title t,movie_keyword mk,movie_companies mc#t.id=mk.movie_id,t.id=mc.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1949,t.production_year,<,2019#11976
-cast_info ci,title t,movie_companies mc#t.id=ci.movie_id,t.id=mc.movie_id#t.production_year,>,1920,t.production_year,<,1977,ci.role_id,=,2#2402587
-cast_info ci,title t,movie_companies mc#t.id=ci.movie_id,t.id=mc.movie_id#t.production_year,>,1905,t.production_year,<,1945,ci.role_id,=,2#745595
-cast_info ci,title t#t.id=ci.movie_id#t.production_year,>,1890,t.production_year,<,1912#58325
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1960,t.production_year,<,1993#204004
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1943,t.production_year,<,1969#38149
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1917,t.production_year,<,1997#304320
-title t,movie_info mi,movie_companies mc,movie_keyword mk#t.id=mi.movie_id,t.id=mk.movie_id,t.id=mc.movie_id#mi.info_type_id,=,16,t.production_year,>,1892,t.production_year,<,1980#85611598
-cast_info ci,title t#t.id=ci.movie_id#t.production_year,>,1981,t.production_year,<,2001#8112628
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1886,t.production_year,<,1912#259
-cast_info ci,title t#t.id=ci.movie_id#t.production_year,>,1898,t.production_year,<,1942#1123332
-title t,movie_keyword mk,movie_companies mc#t.id=mk.movie_id,t.id=mc.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1978,t.production_year,<,1984#555
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1966,t.production_year,<,2007#533624
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1916,t.production_year,<,1984#127597
-title t,movie_info mi,movie_info_idx mi_idx,cast_info ci#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=ci.movie_id#mi.info_type_id,=,3,mi_idx.info_type_id,=,101,t.production_year,>,1947,t.production_year,<,2004#8839478
-cast_info ci,title t,movie_companies mc#t.id=ci.movie_id,t.id=mc.movie_id#t.production_year,>,1913,t.production_year,<,1927,ci.role_id,=,2#187076
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1902,t.production_year,<,1949#30720
-title t,cast_info ci,movie_keyword mk,movie_info_idx mi_idx#t.id=mk.movie_id,t.id=ci.movie_id,t.id=mi_idx.movie_id#t.production_year,>,2002,t.kind_id,=,1,mi_idx.info_type_id,=,101#70938858
-title t,movie_keyword mk,movie_companies mc#t.id=mk.movie_id,t.id=mc.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1897,t.production_year,<,1904#9
-cast_info ci,title t,movie_companies mc#t.id=ci.movie_id,t.id=mc.movie_id#t.production_year,>,1939,t.production_year,<,1995,ci.role_id,=,2#4273205
-cast_info ci,title t,movie_companies mc#t.id=ci.movie_id,t.id=mc.movie_id#t.production_year,>,1909,t.production_year,<,1924,ci.role_id,=,2#194365
-title t,movie_info mi,movie_info_idx mi_idx,movie_companies mc#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=mc.movie_id#mi_idx.info_type_id,=,101,mi.info_type_id,=,3,t.production_year,>,1904,t.production_year,<,1920,mc.company_type_id,=,2#5565
-cast_info ci,title t,movie_companies mc#t.id=ci.movie_id,t.id=mc.movie_id#t.production_year,>,2011,t.production_year,<,2018,ci.role_id,=,2#925178
-title t,movie_keyword mk,movie_companies mc#t.id=mk.movie_id,t.id=mc.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1946,t.production_year,<,1963#589
-title t,movie_info mi,movie_info_idx mi_idx,movie_companies mc#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=mc.movie_id#mi_idx.info_type_id,=,101,mi.info_type_id,=,3,t.production_year,>,1913,t.production_year,<,2021,mc.company_type_id,=,2#808867
-title t,movie_info mi,movie_info_idx mi_idx,movie_companies mc#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=mc.movie_id#mi_idx.info_type_id,=,101,mi.info_type_id,=,3,t.production_year,>,1993,t.production_year,<,2001,mc.company_type_id,=,2#112107
-title t,movie_info mi,movie_info_idx mi_idx,movie_companies mc#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=mc.movie_id#mi_idx.info_type_id,=,101,mi.info_type_id,=,3,t.production_year,>,1938,t.production_year,<,1976,mc.company_type_id,=,2#119735
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1975,t.production_year,<,1984#41601
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1870,t.production_year,<,1932#12874
-title t,movie_info mi,movie_info_idx mi_idx,cast_info ci#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=ci.movie_id#mi.info_type_id,=,3,mi_idx.info_type_id,=,101,t.production_year,>,1956,t.production_year,<,1964#443308
-title t,movie_info mi,movie_companies mc,cast_info ci#t.id=mi.movie_id,t.id=mc.movie_id,t.id=ci.movie_id#ci.role_id,=,2,mi.info_type_id,=,16,t.production_year,>,1874,t.production_year,<,2008#85969641
-title t,movie_info mi,movie_companies mc,cast_info ci#t.id=mi.movie_id,t.id=mc.movie_id,t.id=ci.movie_id#ci.role_id,=,2,mi.info_type_id,=,16,t.production_year,>,1910,t.production_year,<,1999#34511095
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1882,t.production_year,<,1897#11
-title t,movie_info mi,movie_info_idx mi_idx,movie_companies mc#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=mc.movie_id#mi_idx.info_type_id,=,101,mi.info_type_id,=,3,t.production_year,>,1981,t.production_year,<,1988,mc.company_type_id,=,2#42626
-title t,movie_info mi,movie_info_idx mi_idx,movie_companies mc#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=mc.movie_id#mi_idx.info_type_id,=,101,mi.info_type_id,=,3,t.production_year,>,1899,t.production_year,<,1943,mc.company_type_id,=,2#43181
-cast_info ci,title t#t.id=ci.movie_id#t.production_year,>,1943,t.production_year,<,2009#24187144
-cast_info ci,title t#t.id=ci.movie_id#t.production_year,>,1870,t.production_year,<,1901#9032
-title t,movie_info mi,movie_companies mc,cast_info ci#t.id=mi.movie_id,t.id=mc.movie_id,t.id=ci.movie_id#ci.role_id,=,2,mi.info_type_id,=,16,t.production_year,>,1884,t.production_year,<,1983#15848318
-cast_info ci,title t#t.id=ci.movie_id#t.production_year,>,1931,t.production_year,<,1939#330284
-title t,movie_info mi,movie_info_idx mi_idx,movie_companies mc#t.id=mi.movie_id,t.id=mi_idx.movie_id,t.id=mc.movie_id#mi_idx.info_type_id,=,101,mi.info_type_id,=,3,t.production_year,>,1883,t.production_year,<,1895,mc.company_type_id,=,2#146
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1979,t.production_year,<,2019#667467
-title t,movie_info mi,movie_companies mc,cast_info ci,movie_keyword mk#t.id=mi.movie_id,t.id=mc.movie_id,t.id=ci.movie_id,t.id=mk.movie_id#ci.role_id,=,2,mi.info_type_id,=,16,t.production_year,>,1889,t.production_year,<,2003,mk.keyword_id,=,7084#275314
-title t,movie_keyword mk,movie_companies mc,movie_info mi#t.id=mk.movie_id,t.id=mc.movie_id,t.id=mi.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1892,t.production_year,<,1980#108879
-title t,movie_keyword mk,movie_companies mc#t.id=mk.movie_id,t.id=mc.movie_id#mk.keyword_id,=,398,mc.company_type_id,=,2,t.production_year,>,1906,t.production_year,<,1975#3295
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,1999#1
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2000#1
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2001#1
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2002#1
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2003#1
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2004#4
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2005#7
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2006#7
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2007#9
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2008#9
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2009#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2010#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2011#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2012#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2013#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2014#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2015#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2016#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2017#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2018#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2019#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2020#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1995,t.production_year,<,2021#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,1999#1
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2000#1
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2001#1
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2002#1
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2003#1
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2004#4
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2005#7
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2006#7
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2007#9
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2008#9
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2009#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2010#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2011#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2012#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2013#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2014#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2015#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2016#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2017#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2018#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2019#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2020#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1996,t.production_year,<,2021#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,1999#1
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2000#1
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2001#1
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2002#1
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2003#1
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2004#4
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2005#7
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2006#7
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2007#9
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2008#9
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2009#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2010#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2011#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2012#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2013#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2014#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2015#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2016#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2017#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2018#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2019#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2020#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1997,t.production_year,<,2021#17
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2004#3
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2005#6
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2006#6
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2007#8
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2008#8
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2009#15
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2010#15
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2011#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2012#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2013#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2014#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2015#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2016#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2017#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2018#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2019#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2020#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1998,t.production_year,<,2021#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2004#3
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2005#6
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2006#6
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2007#8
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2008#8
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2009#15
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2010#15
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2011#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2012#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2013#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2014#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2015#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2016#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2017#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2018#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2019#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2020#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,1999,t.production_year,<,2021#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2004#3
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2005#6
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2006#6
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2007#8
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2008#8
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2009#15
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2010#15
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2011#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2012#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2013#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2014#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2015#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2016#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2017#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2018#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2019#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2020#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2000,t.production_year,<,2021#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2004#3
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2005#6
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2006#6
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2007#8
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2008#8
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2009#15
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2010#15
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2011#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2012#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2013#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2014#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2015#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2016#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2017#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2018#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2019#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2020#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2001,t.production_year,<,2021#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2004#3
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2005#6
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2006#6
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2007#8
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2008#8
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2009#15
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2010#15
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2011#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2012#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2013#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2014#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2015#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2016#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2017#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2018#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2019#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2020#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2002,t.production_year,<,2021#16
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2005#3
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2006#3
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2007#5
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2008#5
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2009#12
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2010#12
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2011#13
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2012#13
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2013#13
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2014#13
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2015#13
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2016#13
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2017#13
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2018#13
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2019#13
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2020#13
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2003,t.production_year,<,2021#13
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2004,t.production_year,<,2007#2
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2004,t.production_year,<,2008#2
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2004,t.production_year,<,2009#9
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2004,t.production_year,<,2010#9
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2004,t.production_year,<,2011#10
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2004,t.production_year,<,2012#10
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2004,t.production_year,<,2013#10
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2004,t.production_year,<,2014#10
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2004,t.production_year,<,2015#10
+movie_companies mc,title t,movie_info_idx mi_idx#t.id=mc.movie_id,t.id=mi_idx.movie_id#mi_idx.info_type_id,=,113,mc.company_type_id,=,2,t.production_year,>,2004,t.production_year,<,2016#10

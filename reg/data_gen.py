@@ -94,12 +94,12 @@ def gen_bitmaps_and_cardinalities(filename, bitmap_only=False, directory='worklo
                 if not bitmap_only:
                     workload_queries.append(list(row) + [row_card])
 
-    # save it
-    with open(os.path.join(directory, '%s-card.bitmaps' % (filename, )), 'wb') as f:
-        pickle.dump(workload_bitmaps, f)
-    if not bitmap_only:     
-        pd.DataFrame(workload_queries).to_csv(os.path.join(directory, '%s-card.csv' % (filename, )), sep='#', header=None, index=False)
-    pd.Series(workload_pairs).to_csv(os.path.join(directory, '%s-card-pair.csv' % (filename, )), header=None, index=False)   
+            # save it
+            with open(os.path.join(directory, '%s-card.bitmaps' % (filename, )), 'wb') as f:
+                pickle.dump(workload_bitmaps, f)
+            if not bitmap_only:     
+                pd.DataFrame(workload_queries).to_csv(os.path.join(directory, '%s-card.csv' % (filename, )), sep='#', header=None, index=False)
+            pd.Series(workload_pairs).to_csv(os.path.join(directory, '%s-card.pairs' % (filename, )), header=None, index=False)   
 
 def main():
     parser = argparse.ArgumentParser()

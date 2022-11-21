@@ -19,7 +19,7 @@ Learned Cardinalities Estimation with Regularities
     Then we run the training with the bitmaps. This part is credited to [Thomas Kipf, et al.](https://github.com/andreaskipf/learnedcardinalities)
 
     ```bash
-    python3 train.py job-cmp-mini-card --cmp workloads/job-cmp-mini-pairs.csv
+    python3 train.py job-cmp-mini-card --cmp workloads/job-cmp-mini-card-pairs.csv
     ```
 
     We added extra evaluation for the **monotonicity** by introducing the relative partial order labels in `job-cmp-mini-card-pairs.csv`. We will utilize it to calculate the obeying rate.
@@ -37,6 +37,49 @@ Learned Cardinalities Estimation with Regularities
 
 3. Evaluate the monotonicity with MonoM score
 
+
+## Results
+
+On `job-cmp-mini` dataset we created:
+
+```
+Q-Error training set:
+Median: 9.035106910996845
+90th percentile: 112.84683343500987
+95th percentile: 245.0
+99th percentile: 950.9500492483508
+Max: 28807.0
+Mean: 73.84785764410925
+
+Q-Error validation set:
+Median: 8.102225041004711
+90th percentile: 94.80605604405748
+95th percentile: 208.28043650561827
+99th percentile: 1081.6639247096732
+Max: 103861.0
+Mean: 179.64540903871588
+
+Loaded queries
+Loaded bitmaps
+Number of test samples: 186
+Prediction time per test sample: 0.013295040335706486
+
+Q-Error job-cmp-mini-card:
+Median: 395.0625
+90th percentile: 2046.3333333333333
+95th percentile: 6141.75
+99th percentile: 6176.3
+Max: 6189.0
+Mean: 1068.9164904381933
+
+MonoM job-cmp-mini-card:
+ Median: 1.0
+ 90th percentile: 1.0
+ 95th percentile: 1.0
+ 99th percentile: 1.0
+ Max: 1
+ Mean: 0.9470588235294117
+```
 
 ## TODOs
 
