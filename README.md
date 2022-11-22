@@ -46,54 +46,46 @@ Learned Cardinalities Estimation with Regularities
 
 
 ## Results
+We trained on the training data provided by Kipf, et al. for 100 epochs with 10000 queries of the training data, and then tested on our `job-cmp-light` dataset to the Q-score and MonoM score.
 
 Train / Eval
 ```
 Q-Error training set:
-Median: 9.035106910996845
-90th percentile: 112.84683343500987
-95th percentile: 245.0
-99th percentile: 950.9500492483508
-Max: 28807.0
-Mean: 73.84785764410925
+Median: 2.76472872178293
+90th percentile: 17.0
+95th percentile: 32.69356061737146
+99th percentile: 115.25250000000005
+Max: 1421.34375
+Mean: 9.74698230501782
 
 Q-Error validation set:
-Median: 8.102225041004711
-90th percentile: 94.80605604405748
-95th percentile: 208.28043650561827
-99th percentile: 1081.6639247096732
-Max: 103861.0
-Mean: 179.64540903871588
+Median: 2.669427808000976
+90th percentile: 17.00664223919475
+95th percentile: 35.71871720512936
+99th percentile: 150.92579164796643
+Max: 18868.0
+Mean: 45.83238834596302
 ```
 
-On `job-cmp-mini` dataset we created:
-
 ```
-Loaded queries
-Loaded bitmaps
-Number of test samples: 186
-Prediction time per test sample: 0.013295040335706486
+Q-Error job-cmp-light-card:
+Median: 2.259790362051729
+90th percentile: 31.930000000000007
+95th percentile: 123.63857710240028
+99th percentile: 4012.0200000000013
+Max: 7285.909090909091
+Mean: 99.3319545865635
 
-Q-Error job-cmp-mini-card:
-Median: 395.0625
-90th percentile: 2046.3333333333333
-95th percentile: 6141.75
-99th percentile: 6176.3
-Max: 6189.0
-Mean: 1068.9164904381933
-
-MonoM job-cmp-mini-card:
+MonoM job-cmp-light-card:
 Median: 1.0
 90th percentile: 1.0
 95th percentile: 1.0
 99th percentile: 1.0
 Max: 1
-Mean: 0.9470588235294117
+Mean: 0.7289156626506024
 ```
 
-On `job-cmp-light` dataset
-```
-```
+We can see that the Q-error is low but the MonoM score is not high, indicating a violation of monotonicity.
 
 ## TODOs
 

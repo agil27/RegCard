@@ -73,8 +73,10 @@ def gen_bitmaps_and_cardinalities(filename, bitmap_only=False, directory='worklo
             cursor.execute('ABORT;')
     cursor.close()
 
-    cmp_pairs = np.array(pd.read_csv(os.path.join(directory, filename + '-pairs.csv'), header=None)[0])
-    num_queries = len(cmp_pairs)
+    if not bitmap_only:
+        cmp_pairs = np.array(pd.read_csv(os.path.join(directory, filename + '-pairs.csv'), header=None)[0])
+
+    num_queries = len(df)
     manager = multiprocess.Manager()
     workload_bitmaps = manager.list([None for _ in range(num_queries)])
     workload_queries = manager.list([None for _ in range(num_queries)])
@@ -97,10 +99,10 @@ def gen_bitmaps_and_cardinalities(filename, bitmap_only=False, directory='worklo
             cursor.execute('ABORT;')
             return
         else:
-            if row_card > 0:
+            if bitmap_only or row_card > 0:
                 workload_bitmaps[i] = row_bitmap
-                workload_pairs[i] = cmp_pairs[i]
                 if not bitmap_only:
+                    workload_pairs[i] = cmp_pairs[i]
                     workload_queries[i] = list(row) + [row_card]
             cursor.execute('COMMIT;')
         # print('row', i, 'finished')
@@ -111,27 +113,30 @@ def gen_bitmaps_and_cardinalities(filename, bitmap_only=False, directory='worklo
     for _ in tqdm(pool.imap_unordered(thread_func, params), total=len(df)):
         pass
 
-    # filter the non-NIL rows]
-    non_nil_idx = [i for i in range(num_queries) if workload_pairs[i] is not None]
-    idx_map = {j : i for i, j in enumerate(non_nil_idx)}
-    workload_bitmaps = [workload_bitmaps[i] for i in non_nil_idx]
-    workload_queries = [workload_queries[i] for i in non_nil_idx]
-    workload_pairs = [workload_pairs[i] for i in non_nil_idx]
-    workload_cmps = []
-    for cmp in workload_pairs:
-        op = '>' if '>' in cmp else '='
-        left, right = cmp.split(op)
-        if left in idx_map and right in idx_map:
-            left = idx_map[int(left)]
-            right = idx_map[int(right)]
-        workload_cmps.append(left + op + right)
-
+    # filter the non-NIL rows
+    if not bitmap_only:
+        non_nil_idx = [i for i in range(num_queries) if workload_pairs[i] is not None]
+        idx_map = {j : i for i, j in enumerate(non_nil_idx)}
+        workload_bitmaps = [workload_bitmaps[i] for i in non_nil_idx]
+        workload_queries = [workload_queries[i] for i in non_nil_idx]
+        workload_pairs = [workload_pairs[i] for i in non_nil_idx]
+        workload_cmps = []
+        for cmp in workload_pairs:
+            op = '>' if '>' in cmp else '='
+            left, right = cmp.split(op)
+            if left in idx_map and right in idx_map:
+                left = idx_map[int(left)]
+                right = idx_map[int(right)]
+            workload_cmps.append(left + op + right)
+    else:
+        workload_bitmaps = [wb for wb in workload_bitmaps]
+        
     # save it
     with open(os.path.join(directory, '%s-card.bitmaps' % (filename, )), 'wb') as f:
         pickle.dump(workload_bitmaps, f)
     if not bitmap_only:     
         pd.DataFrame(workload_queries).to_csv(os.path.join(directory, '%s-card.csv' % (filename, )), sep='#', header=None, index=False)
-    pd.Series(workload_cmps).to_csv(os.path.join(directory, '%s-card.cmp' % (filename, )), header=None, index=False)   
+        pd.Series(workload_cmps).to_csv(os.path.join(directory, '%s-card.cmp' % (filename, )), header=None, index=False)   
 
 
 def main():
