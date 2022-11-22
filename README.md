@@ -1,6 +1,8 @@
 # RegCard
 Learned Cardinalities Estimation with Regularities
 
+*Yuanbiao Wang, Ziye Tao, Vic Feng*
+
 ## How to use
 
 1. Groundtruth and Featurize
@@ -9,46 +11,92 @@ Learned Cardinalities Estimation with Regularities
 
     ```bash
     python3 reg/data_gen.py -d data -f train -b
-    python3 reg/data_gen.py -d workloads -f job-cmp-mini
+    python3 reg/data_gen.py -d workloads -f <workload-name>
     ```
 
-    Alternatively we can also try `job-cmp-light` and `job-cmp`, which are much larger.
-    
-    ```bash
-    python3 reg/data_gen.py -d workloads -f job-cmp-light
-    python3 reg/data_gen.py -d workloads -f job-cmp
-    ```
+    The name of the workload can be `job-cmp-mini` or `job-cmp-ligh` for now, which are two synthetic query datasets we generated.
 
     This will also create the sampled materialized table view for each of the tables.
 
 2. Training and Evaluation
 
-    Then we run the training with the bitmaps. This part is credited to [Thomas Kipf, et al.](https://github.com/andreaskipf/learnedcardinalities)
+    Then we run the training with the bitmaps. 
 
     ```bash
-    python3 train.py job-cmp-mini-card --cmp
+    python3 train.py <workload-name>-card --cmp <--cuda>
     ```
 
-    We added extra evaluation for the **monotonicity** by introducing the relative partial order labels in `job-cmp-mini-card-pairs.csv`. We will utilize it to calculate the obeying rate.
+    We added extra evaluation for the **monotonicity** by introducing the relative partial order labels in `job-cmp-mini-card.pairs`. We will utilize it to calculate the obeying rate.
+
+
+## Problem Statement
+Cardinality estimation plays an important role in database query optimization. Several recent papers show that learned cardinality estimation methods can achieve higher accuracy than traditional methods. However, one main obstacle preventing learned methods from production deployment is violating logical principles. For example, when we changed the query predicates from $[0, 100]$ to a smaller range $[0, 50]$, the real cardinality decreased, but the estimated cardinality by learned methods can be increased, which violates the monotonicity.
+
+The main target of our project is to inspect the performance learned cardinality estimation with popular machine learning methods, and in the meanwhile try to evaluate how they conform to many heuristic regularities.
+
+For the first half of our project, we mainly focus on implementing a cardinality estimation algorithm with convolutional networks, as well as designing appropriate benchmark to evaluate the monotonicity regularity.
 
 ## Designs
 
-1. Test dataset generation
+### Modeling and featurization
 
-    - We provided 3 versions of data: ...
-    - We provide the compare pairs
-    
-2. Featurize and modeling
+We used the open source code from [Thomas Kipf, et al.](https://github.com/andreaskipf/learnedcardinalities). In the paper, the author proposed multi-set convolutional network(MSCN) for cardinality estimation. The input features for this model are all one-hot encoded, including:
 
-    bitmaps / model ...
+    - tables selected from
+    - join predicates (which is encoded through the tables joined and the join condition)
+    - selection predicates (which is encoded through the join column and the threshold value)
+    - a bitmap on a materialized view of the tables selected using the corresponding single-table selection predicates (not the join ones!) with a sample size of 1000
 
-3. Evaluate the monotonicity with MonoM score
+<img src='figures/featurize.png'>
 
+We used their featurization as well as modeling code, but they didn't release the code for bitmap generation, so we have to implement this on our own. Since we are generating a much larger benchmarking dataset for monotonicity evaluation (which will mentioned in the later section). We trained with our generated bitmaps and their provided bitmaps, and the metrics look alike.
+
+### Test dataset generation
+
+#### Benchmarking the monotonicity
+The benchmark used in the paper mentioned aforehead is IMDb, so we continue to use this one. Remembering that our goal is to test the model performance on two aspects: accuracy of cardinality estimation and monotonicity of the estimation, we generated a larger benchmarking dataset based on the provided ones focusing on the monotonicity. 
+
+We modified the data from the `JOB-Light` workload mentioned in the paper, which only has one range query attribute `title.production_year`. For example, one base predicate is:
+```sql
+SELECT movie_companies mc, title t, movie_info_idx mi_idx 
+WHERE t.id=mc.movie_id 
+AND t.id=mi_idx.movie_id 
+AND mi_idx.info_type_id=112
+AND mc.company_type_id=2
+AND t.production_year>2021
+```
+
+We then modify the `production_year` to range from 1930 to 2021, and logically obtaining a set of partial order relationships between the cardinality estimations of these queries. We provided a file to demonstrate this monotonicity, with each of the records in this file being something like `i > j`, where `i` and `j` are query index in the query dataset. The notation stands for: the cardinality estimation of query $i$ should be at least that of query $j$.
+
+#### Expedite the true cardinality calculation
+We also determined the actual cardinality for our benchmarking dataset `JOB-Cmp` using `postgresql`. Because some of the queries may take very time to execute, we attempt to expedite the data generation with multi-processing by maintaining an 8-worker process pool. For each of the worker, the cardinality of the current query is determined and the corresponding bitmaps are also calculated along the way.
+
+Note that we filtered out the queries with zero cardinality according to the requirement of the model.
+
+#### Versions
+
+We provide three different versions of the test dataset: mini test, light test and full test which contain 100, 5000 and about 20k queries respectively. Due to the computation resource limitation, we only evaluate the model on the first two test datasets for now. The second one would took 6-8 hours to generate all actual cardinalities, so we didn't scale up to the third one.
+
+### Metrics
+
+#### Q-Error
+
+Q-Error has the formula as follows, where $c$ stands for the true cardinality and $\hat c$ stands for the estimated cardinality.
+
+$$
+\text{Q-Error}(c, \hat c) = \text{Max}\left(\frac{\hat c}{c}, \frac{c}{\hat c}\right)
+$$
+
+For Q-Error, the median and quantiles matter more than the mean because there might be some extreme outliers due to high-leverage.
+
+#### MonoM (Monotonicity Matching) Score
+
+We defined the MonoM score in the following way: for each comparable pair of queries $i$ and $j$, we assign it score 1 if the model predictions match the ground truth logic, otherwise its score is 0. The mean MonoM score can be seen as the accuracy of monotonicity compliance of the model.
 
 ## Results
 We trained on the training data provided by Kipf, et al. for 100 epochs with 10000 queries of the training data, and then tested on our `job-cmp-light` dataset to the Q-score and MonoM score.
 
-Train / Eval
+Train / Eval Q-Error
 ```
 Q-Error training set:
 Median: 2.76472872178293
@@ -67,6 +115,7 @@ Max: 18868.0
 Mean: 45.83238834596302
 ```
 
+Test Q-Error and MonoM score
 ```
 Q-Error job-cmp-light-card:
 Median: 2.259790362051729
@@ -85,10 +134,23 @@ Max: 1
 Mean: 0.7289156626506024
 ```
 
-We can see that the Q-error is low but the MonoM score is not high, indicating a violation of monotonicity.
+We can see that the Q-error is low, which is within expectation, because the model is trained based on this target. But the MonoM score is not high, indicating a violation of monotonicity at around 30% error rate, which underlines the importance of designing a regularized model that complies with the monotonicity property.
 
+## Next steps
+
+The most straightforward follow-up is to develop models that conforms with such monotonicity. We plan to modify the MSCN model training by adding regularization terms to penalize the violation of the monotonicity. The regularization loss term is defined as:
+
+$$
+L_{mono_reg} = \lambda_1 \cdot\textbf{1}[D(X, Y) != 0] \cdot \text{MSE}[\text{c-sigmoid}(f(X) - f(Y)), \text{c-sigmoid}(D(X, Y))]
+$$
+where $D(X, Y)$ is the Jaccard distance $$D(X,Y) = (X - Y) / (X \cup Y) $$between predicate range $X=[a,b]$ and $Y=[c,d]$ and c-sigmoid function is a soften-version of sign function: $$\text{c-sigmoid}(x) = \frac{1}{1 + e^{-cx}}$$
+
+We also plan to experiment with other models like tree models.
 ## TODOs
-
+- [ ] modify the MSCN model to include the regularization terms
+- [ ] train `RandomForest` and `XGBoost` models to evaluate
+- [ ] scale up to even larger workloads using advanced sampling from the max-scale `job-cmp` covering a wide range of monotonicity constraints.
+- [ ] more regularity compliances
 - [x] fix `python data_gen.py`, will throw error on 59it.
 - [x] generate files in `multiprocess`, which would be faster utilizing 8 cores of the CPU
 - [x] generate a list of queries for monotonicity evaluation, and generate a list of comparisons that look like `i > j` or `i = 0` to compare row $i$ and row $j$.
