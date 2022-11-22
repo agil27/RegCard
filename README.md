@@ -42,14 +42,20 @@ For the first half of our project, we mainly focus on implementing a cardinality
 
 We used the open source code from [Thomas Kipf, et al.](https://github.com/andreaskipf/learnedcardinalities). In the paper, the author proposed multi-set convolutional network(MSCN) for cardinality estimation. The input features for this model are all one-hot encoded, including:
 
-    - tables selected from
-    - join predicates (which is encoded through the tables joined and the join condition)
-    - selection predicates (which is encoded through the join column and the threshold value)
-    - a bitmap on a materialized view of the tables selected using the corresponding single-table selection predicates (not the join ones!) with a sample size of 1000
+- tables selected from
+- join predicates (which is encoded through the tables joined and the join condition)
+- selection predicates (which is encoded through the join column and the threshold value)
+- a bitmap on a materialized view of the tables selected using the corresponding single-table selection predicates (not the join ones!) with a sample size of 1000
 
 <img src='figures/featurize.png'>
 
 We used their featurization as well as modeling code, but they didn't release the code for bitmap generation, so we have to implement this on our own. Since we are generating a much larger benchmarking dataset for monotonicity evaluation (which will mentioned in the later section). We trained with our generated bitmaps and their provided bitmaps, and the metrics look alike.
+
+Some other additional nodes:
+
+- In the training process, the number of joins is limited to at most two but the model is able to generalize to more joins on the new queries where there are more than two tables to join.
+
+- Normalization (min-max normalization) is used in featurization, so if the test cardinality range is much larger than the training data (which might be possible due to unexpected large join results), the estimation can be off a lot due to the unnormalization designed for the current min-max setting.
 
 ### Test dataset generation
 
@@ -149,7 +155,8 @@ We also plan to experiment with other models like tree models.
 ## TODOs
 - [ ] modify the MSCN model to include the regularization terms
 - [ ] train `RandomForest` and `XGBoost` models to evaluate
-- [ ] scale up to even larger workloads using advanced sampling from the max-scale `job-cmp` covering a wide range of monotonicity constraints.
+- [ ] scale up to even larger workloads using advanced sampling from the max-scale `job-cmp` covering a wide range of monotonicity constraints
+- [ ] check code to comply with latest `PyTorch` features and save model parameters
 - [ ] more regularity compliances
 - [x] fix `python data_gen.py`, will throw error on 59it.
 - [x] generate files in `multiprocess`, which would be faster utilizing 8 cores of the CPU
