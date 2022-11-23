@@ -25,6 +25,11 @@ Learned Cardinalities Estimation with Regularities
     ```bash
     python3 train.py <workload-name>-card --cmp <--cuda>
     ```
+    
+    Generate new queris and corresponding cmp file.
+    ```bash
+    python3 reg/test_gen.py -f <workload-name> -o <output file name>
+    ```
 
     We added extra evaluation for the **monotonicity** by introducing the relative partial order labels in `job-cmp-mini-card.pairs`. We will utilize it to calculate the obeying rate.
 
