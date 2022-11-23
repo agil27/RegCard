@@ -147,6 +147,47 @@ Mean: 0.7289156626506024
 
 We can see that the Q-error is low, which is within expectation, because the model is trained based on this target. But the MonoM score is not high, indicating a violation of monotonicity at around 30% error rate, which underlines the importance of designing a regularized model that complies with the monotonicity property.
 
+Updated: results with 100, 000 training samples showed improvements in the MonoM score:
+```
+Q-Error training set:
+Median: 2.907698784910254
+90th percentile: 19.79540411027253
+95th percentile: 37.0080607102792
+99th percentile: 149.69538461538468
+Max: 6673271.188405797
+Mean: 761.5109650222591
+
+Q-Error validation set:
+Median: 2.897194253442696
+90th percentile: 19.7735759810261
+95th percentile: 43.66921182674804
+99th percentile: 185.9585433027229
+Max: 92091142.4
+Mean: 92125.078754865
+
+Loaded queries
+workloads/job-cmp-light-card.bitmaps
+Loaded bitmaps
+Number of test samples: 4763
+Prediction time per test sample: 0.011711843419720739
+
+Q-Error job-cmp-light-card:
+Median: 5.456502968403708
+90th percentile: 494.5067607162239
+95th percentile: 3993.483870967742
+99th percentile: 558086.0600000005
+Max: 747273.6666666666
+Mean: 10713.35142029888
+
+MonoM job-cmp-light-card:
+Median: 1.0
+90th percentile: 1.0
+95th percentile: 1.0
+99th percentile: 1.0
+Max: 1
+Mean: 0.8837572512271308
+```
+
 ## Next steps
 
 The most straightforward follow-up is to develop models that conforms with such monotonicity. We plan to modify the MSCN model training by adding regularization terms to penalize the violation of the monotonicity. The regularization loss term is defined as:
