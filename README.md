@@ -14,7 +14,7 @@ Learned Cardinalities Estimation with Regularities
     python3 reg/data_gen.py -d workloads -f <workload-name>
     ```
 
-    The name of the workload can be `job-cmp-mini` or `job-cmp-ligh` for now, which are two synthetic query datasets we generated.
+    The name of the workload can be `job-cmp-mini` or `job-cmp-light` for now, which are two synthetic query datasets we generated.
 
     This will also create the sampled materialized table view for each of the tables.
 
