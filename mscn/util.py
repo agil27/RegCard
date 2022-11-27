@@ -1,4 +1,5 @@
 import numpy as np
+import torch
 
 
 # Helper functions for data processing
@@ -106,7 +107,13 @@ def normalize_labels(labels, min_val=None, max_val=None):
 
 
 def unnormalize_labels(labels_norm, min_val, max_val):
-    labels_norm = np.array(labels_norm, dtype=np.float32)
+    res_list = []
+    for t in labels_norm:
+        if isinstance(t, torch.Tensor) and t.is_cuda:
+            res_list.append(t.cpu())
+        else:
+            res_list.append(t)
+    labels_norm = np.array(res_list, dtype=np.float32)
     labels = (labels_norm * (max_val - min_val)) + min_val
     return np.array(np.round(np.exp(labels)), dtype=np.int64)
 
