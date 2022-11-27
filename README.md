@@ -195,7 +195,8 @@ The most straightforward follow-up is to develop models that conforms with such 
 $$
 L_{mono_reg} = \lambda_1 \cdot\textbf{1}[D(X, Y) != 0] \cdot \text{MSE}[\text{c-sigmoid}(f(X) - f(Y)), \text{c-sigmoid}(D(X, Y))]
 $$
-where $D(X, Y)$ is the Jaccard distance $$D(X,Y) = (X - Y) / (X \cup Y) $$between predicate range $X=[a,b]$ and $Y=[c,d]$ and c-sigmoid function is a soften-version of sign function: $$\text{c-sigmoid}(x) = \frac{1}{1 + e^{-cx}}$$
+
+where $D(X, Y)$ is the Jaccard distance $$D(X,Y) = (X - Y) / (X \cup Y) $$ between predicate range $X=[a,b]$ and $Y=[c,d]$, and c-sigmoid function is a soften-version of sign function: $$\text{c-sigmoid}(x) = \frac{1}{1 + e^{-cx}}$$
 
 We also plan to experiment with other models like tree models.
 ## TODOs
