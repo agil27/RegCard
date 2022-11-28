@@ -188,9 +188,27 @@ Max: 1
 Mean: 0.8837572512271308
 ```
 
-**[Updated 11/27/22]:** We implemented the regularization term for enforcing monotonicity as part of the loss function. There are two associated hyperparameters: $\lambda_1$ and $c$. We trained the model for 10 epochs and 10000 training queries with $\lambda_1 = 0.1$ and $c = 100$ for regularization.
+**[Updated 11/27/22]:** We implemented the regularization term for enforcing monotonicity as part of the loss function. There are two associated hyperparameters: $\lambda_1$ and $c$. We trained the model for 100 epochs and 10000 training queries with $\lambda_1 = 0.1$ and $c = 100$ for regularization.
 
-TODO: add result
+```
+Q-Error job-cmp-mini-card:
+Median: 359.75
+90th percentile: 985.4166666666667
+95th percentile: 3041.5
+99th percentile: 3505.4
+Max: 3694.0
+Mean: 624.2748266000639
+
+MonoM job-cmp-mini-card:
+Median: 1.0
+90th percentile: 1.0
+95th percentile: 1.0
+99th percentile: 1.0
+Max: 1
+Mean: 0.9470588235294117
+```
+
+We see the both the Q-Error and MonoM score increases, meaning that the model enforces more monotonicity at the cost of sacrificing prediction accuracy. Note that the hyperparameters could be further optimized to achieve a better tradeoff.
 
 ## Next steps
 
