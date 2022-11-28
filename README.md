@@ -197,7 +197,7 @@ TODO: add result
 The most straightforward follow-up is to develop models that conforms with such monotonicity. We plan to modify the MSCN model training by adding regularization terms to penalize the violation of the monotonicity. The regularization loss term is defined as:
 
 $$
-L_{\text{mono_reg}} = \lambda_1 \cdot\textbf{1}[D(X, Y) != 0] \cdot \text{MSE}[\text{c-sigmoid}(\text{c-sigmoid}(D(f(X), f(Y))), \text{c-sigmoid}(D(X, Y))]
+L_{\text{mono\_reg}} = \lambda_1 \cdot\textbf{1}[D(X, Y) != 0] \cdot \text{MSE}[\text{c-sigmoid}(\text{c-sigmoid}(D(f(X), f(Y))), \text{c-sigmoid}(D(X, Y))]
 $$
 
 where $D(X, Y)$ is the Jaccard distance $$D(X,Y) = (X - Y) / (X \cup Y) $$ where $X$ and $Y$ are predicate ranges $X=[a,b]$ and $Y=[c,d]$, and $$D(f(X), f(Y)) = (|f(X) - f(Y)|) / (\text{max}(f(X), f(Y))$$ for the cardinality estimations. The $c$-sigmoid function is a soften-version of sign function: $$\text{c-sigmoid}(x) = \frac{1}{1 + e^{-cx}}$$ when $c$ is something much larger than 1.
