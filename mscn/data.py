@@ -198,4 +198,19 @@ def load_monotonic_regularization(table2vec, column2vec, op2vec, join2vec, min_v
             left = int(left)
             right = int(right)
             monotonic_constraints.append((left, right))
-    return test_data_loader, monotonic_constraints, [int(x) for x in label]
+    
+    # load predicate range
+    predicate_ranges = list()
+    monotonic_attribute = 't.production_year'
+    att_min, att_max = column_min_max_vals[monotonic_attribute]
+    for predicate_array in predicates:
+        lower_bound, upper_bound = att_min, att_max # inclusive bounds
+        for single_term in predicate_array:
+            attribute, sign, number = single_term
+            if attribute == monotonic_attribute:
+                if sign == '<':
+                    upper_bound = min(upper_bound, float(number) - 1)
+                else:  # sign == '>'
+                    lower_bound = max(lower_bound, float(number) + 1)
+        predicate_ranges.append((lower_bound, upper_bound))
+    return test_data_loader, monotonic_constraints, predicate_ranges

@@ -188,7 +188,7 @@ Max: 1
 Mean: 0.8837572512271308
 ```
 
-**[Updated 11/27/22]:** We implemented the regularization term for enforcing monotonicity as part of the loss function. There are two associated hyperparameters: $\lambda_1$ and $c$. We trained the model for 10 epochs and 10000 training queries with $\lambda_1 = 0.1$ and $c = 0.1$ for regularization.
+**[Updated 11/27/22]:** We implemented the regularization term for enforcing monotonicity as part of the loss function. There are two associated hyperparameters: $\lambda_1$ and $c$. We trained the model for 10 epochs and 10000 training queries with $\lambda_1 = 0.1$ and $c = 100$ for regularization.
 
 TODO: add result
 
