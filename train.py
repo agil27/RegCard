@@ -7,7 +7,7 @@ from torch.autograd import Variable
 from torch.utils.data import DataLoader
 
 from mscn.util import *
-from mscn.data import get_train_datasets, load_data, make_dataset
+from mscn.data import get_train_datasets, load_data, make_dataset, load_monotonic_regularization
 from mscn.model import SetConv
 from reg.cmp import print_monom
 
@@ -28,6 +28,28 @@ def qerror_loss(preds, targets, min_val, max_val):
         else:
             qerror.append(targets[i] / preds[i])
     return torch.mean(torch.cat(qerror))
+
+
+def jaccard_distance(num1, num2):
+    return (num1 - num2)/max(num1, num2)
+
+
+def soften_sign_function(num, soften):
+    return 1/(1+np.exp(-1 * soften * num))
+
+
+def monotonic_regularization(mono_preds, mono_cards, mono_constraints, lbda, soften):
+    regs = []
+    for constraint in mono_constraints:
+        left, right = constraint
+        if 0 <= left < len(mono_preds) and 0 <= right <= len(mono_preds):
+            d = jaccard_distance(mono_cards[left], mono_cards[right])
+            if d == 0:
+                regs.append(0)
+            else:
+                pred_dist = mono_preds[left] - mono_preds[right]
+                regs.append(lbda*(soften_sign_function(pred_dist, soften) - soften_sign_function(d, soften))**2)
+    return torch.mean(torch.FloatTensor(regs))
 
 
 def predict(model, data_loader, cuda):
@@ -73,7 +95,7 @@ def print_qerror(preds_unnorm, labels_unnorm):
     print("Mean: {}".format(np.mean(qerror)))
 
 
-def train_and_predict(workload_name, num_queries, num_epochs, batch_size, hid_units, cuda, cmp=False):
+def train_and_predict(workload_name, num_queries, num_epochs, batch_size, hid_units, cuda, cmp=False, lbda=0.0, soften=1.0):
     # Load training and validation data
     num_materialized_samples = 1000
     dicts, column_min_max_vals, min_val, max_val, labels_train, labels_test, max_num_joins, max_num_predicates, train_data, test_data = get_train_datasets(
@@ -95,6 +117,14 @@ def train_and_predict(workload_name, num_queries, num_epochs, batch_size, hid_un
     train_data_loader = DataLoader(train_data, batch_size=batch_size)
     test_data_loader = DataLoader(test_data, batch_size=batch_size)
 
+    # load workload for monotonic regularization
+    if lbda != 0.0:
+        print('Using lambda = {} and c = {} for monotonic regularization'.format(lbda, soften))
+        monotonic_data_loader, monotonic_constraints, monotonic_cards = load_monotonic_regularization(
+            table2vec, column2vec, op2vec, join2vec, min_val, max_val, column_min_max_vals,
+            num_materialized_samples, batch_size
+        )
+
     model.train()
     for epoch in range(num_epochs):
         loss_total = 0.
@@ -113,7 +143,15 @@ def train_and_predict(workload_name, num_queries, num_epochs, batch_size, hid_un
 
             optimizer.zero_grad()
             outputs = model(samples, predicates, joins, sample_masks, predicate_masks, join_masks)
-            loss = qerror_loss(outputs, targets.float(), min_val, max_val)
+            if lbda == 0.0:
+                loss = qerror_loss(outputs, targets.float(), min_val, max_val)
+            else:
+                monotonic_pred, _ = predict(model, monotonic_data_loader, cuda)
+                mono_pred_unnorm = unnormalize_labels(monotonic_pred, min_val, max_val)
+                qerror = qerror_loss(outputs, targets.float(), min_val, max_val)
+                mono_reg = monotonic_regularization(
+                    mono_pred_unnorm, monotonic_cards, monotonic_constraints, lbda, soften)
+                loss = qerror + mono_reg
             loss_total += loss.item()
             loss.backward()
             optimizer.step()
@@ -192,8 +230,10 @@ def main():
     parser.add_argument("--hid", help="number of hidden units (default: 256)", type=int, default=256)
     parser.add_argument("--cuda", help="use CUDA", action="store_true")
     parser.add_argument("--cmp", help="whether to perform MonoM evaluation", action="store_true")
+    parser.add_argument("--lbda", help="monotonicity regularization strength (default: 0)", type=float, default=0.0)
+    parser.add_argument("--soften", help="constant for soften sign function (default: 1)", type=float, default=0.1)
     args = parser.parse_args()
-    train_and_predict(args.testset, args.queries, args.epochs, args.batch, args.hid, args.cuda, args.cmp)
+    train_and_predict(args.testset, args.queries, args.epochs, args.batch, args.hid, args.cuda, args.cmp, args.lbda, args.soften)
 
 
 if __name__ == "__main__":

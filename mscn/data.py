@@ -1,6 +1,7 @@
 import csv
 import torch
-from torch.utils.data import dataset
+import pandas as pd
+from torch.utils.data import dataset, DataLoader
 import pickle
 from mscn.util import *
 
@@ -169,3 +170,32 @@ def get_train_datasets(num_queries, num_materialized_samples):
                                 max_num_predicates=max_num_predicates)
     print("Created TensorDataset for validation data")
     return dicts, column_min_max_vals, min_val, max_val, labels_train, labels_test, max_num_joins, max_num_predicates, train_dataset, test_dataset
+
+
+def load_monotonic_regularization(table2vec, column2vec, op2vec, join2vec, min_val, max_val,
+        column_min_max_vals, num_materialized_samples, batch_size
+    ):
+    # subject to change
+    card_path = 'workloads/job-cmp-light-card'
+    pair_path = 'workloads/job-cmp-light-pairs.csv'
+
+    # load monotonic queries
+    joins, predicates, tables, samples, label = load_data(card_path, num_materialized_samples)
+    samples_test = encode_samples(tables, samples, table2vec)
+    predicates_test, joins_test = encode_data(predicates, joins, column_min_max_vals, column2vec, op2vec, join2vec)
+    max_num_predicates = max([len(p) for p in predicates_test])
+    max_num_joins = max([len(j) for j in joins_test])
+    labels_test, _, _ = normalize_labels(label, min_val, max_val)
+    test_data = make_dataset(samples_test, predicates_test, joins_test, labels_test, max_num_joins, max_num_predicates)
+    test_data_loader = DataLoader(test_data, batch_size=batch_size)
+
+    # load monotonic constraints
+    cmp = np.array(pd.read_csv(pair_path, header=None)[0])
+    monotonic_constraints = list()
+    for cmp_str in cmp:
+        if '>' in cmp_str:
+            left, right = cmp_str.split('>')
+            left = int(left)
+            right = int(right)
+            monotonic_constraints.append((left, right))
+    return test_data_loader, monotonic_constraints, [int(x) for x in label]
