@@ -197,12 +197,12 @@ TODO: add result
 The most straightforward follow-up is to develop models that conforms with such monotonicity. We plan to modify the MSCN model training by adding regularization terms to penalize the violation of the monotonicity. The regularization loss term is defined as:
 
 $$
-L_{mono_reg} = \lambda_1 \cdot\textbf{1}[D(X, Y) != 0] \cdot \text{MSE}[\text{c-sigmoid}(f(X) - f(Y)), \text{c-sigmoid}(D(X, Y))]
+L_{mono_reg} = \lambda_1 \cdot\textbf{1}[D(X, Y) != 0] \cdot \text{MSE}[\text{c-sigmoid}(\text{c-sigmoid}(D(f(X), f(Y))), \text{c-sigmoid}(D(X, Y))]
 $$
 
-where $D(X, Y)$ is the Jaccard distance $$D(X,Y) = (X - Y) / (X \cup Y) $$ between predicate range $X=[a,b]$ and $Y=[c,d]$, and c-sigmoid function is a soften-version of sign function: $$\text{c-sigmoid}(x) = \frac{1}{1 + e^{-cx}}$$ when $c$ is something much larger than 1.
+where $D(X, Y)$ is the Jaccard distance $$D(X,Y) = (X - Y) / (X \cup Y) $$ where $X$ and $Y$ are predicate ranges $X=[a,b]$ and $Y=[c,d]$, and $$D(f(X), f(Y)) = (f(X) - f(Y)) / (\text{max}(f(X), f(Y))$$ for the cardinality estimations. The $c$-sigmoid function is a soften-version of sign function: $$\text{c-sigmoid}(x) = \frac{1}{1 + e^{-cx}}$$ when $c$ is something much larger than 1.
 
-The basic idea is to penalize the difference between the since of $f(X) - f(Y)$ and $x - Y$. The Jaccard distance comes in handy when $X$ and $Y$ are on a much crazier scale than X and Y. We can also replace Jaccard distance with simple $X - Y$.
+The basic idea is to penalize the difference between the since of $f(X) - f(Y)$ and $X - Y$. The Jaccard distance comes in handy when $X$ and $Y$ are on a much crazier scale than $f(X), f(Y)$, vice versa. We can also replace Jaccard distance with simple $X - Y$.
 
 We also plan to experiment with other models like tree models.
 ## TODOs
