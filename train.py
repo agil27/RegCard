@@ -247,7 +247,7 @@ def main():
     parser.add_argument("--cuda", help="use CUDA", action="store_true")
     parser.add_argument("--cmp", help="whether to perform MonoM evaluation", action="store_true")
     parser.add_argument("--lbda", help="monotonicity regularization strength (default: 0)", type=float, default=0.0)
-    parser.add_argument("--soften", help="constant for soften sign function (default: 1)", type=float, default=100)
+    parser.add_argument("--soften", help="constant for soften sign function (default: 100)", type=float, default=100)
     args = parser.parse_args()
     train_and_predict(args.testset, args.queries, args.epochs, args.batch, args.hid, args.cuda, args.cmp, args.lbda, args.soften)
 
