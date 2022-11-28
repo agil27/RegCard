@@ -200,7 +200,7 @@ $$
 L_{\text{monoreg}} = \lambda_1 \cdot\textbf{1}[D(X, Y) != 0] \cdot \text{MSE}[\text{c-sigmoid}(\text{c-sigmoid}(D(f(X), f(Y))), \text{c-sigmoid}(D(X, Y))]
 $$
 
-where $D(X, Y)$ is the Jaccard distance $$D(X,Y) = (X - Y) / (X \cup Y) $$ where $X$ and $Y$ are predicate ranges $X=[a,b]$ and $Y=[c,d]$, and $$D(f(X), f(Y)) = (|f(X) - f(Y)|) / (\text{max}(f(X), f(Y))$$ for the cardinality estimations. The $c$-sigmoid function is a soften-version of sign function: $$\text{c-sigmoid}(x) = \frac{1}{1 + e^{-cx}}$$ when $c$ is something much larger than 1.
+where $D(X, Y)$ is the Jaccard distance $$D(X,Y) = (X - Y) / (X \cup Y) $$ where $X$ and $Y$ are predicate ranges $X=[a,b]$ and $Y=[c,d]$, and $$D(f(X), f(Y)) = (f(X) - f(Y)) / (\text{max}(f(X), f(Y))$$ for the cardinality estimations. The $c$-sigmoid function is a soften-version of sign function: $$\text{c-sigmoid}(x) = \frac{1}{1 + e^{-cx}}$$ when $c$ is something much larger than 1.
 
 The basic idea is to penalize the difference between the since of $f(X) - f(Y)$ and $X - Y$. The Jaccard distance comes in handy when $X$ and $Y$ are on a much crazier scale than $f(X), f(Y)$, vice versa. We can also replace Jaccard distance with simple $X - Y$.
 
