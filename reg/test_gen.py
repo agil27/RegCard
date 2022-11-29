@@ -5,6 +5,8 @@ import numpy as np
 import pickle
 import csv
 import argparse
+import re
+
 
 def generate_new_line(row, base_predicates):
     new_rows = []
@@ -12,39 +14,46 @@ def generate_new_line(row, base_predicates):
     predicates = row["predicates"]
     if "production_year" in predicates:
         if ">" in predicates and "<" in predicates:
-            for year1 in range(1870, 2022):
-                sub_base_predicates = str(base_predicates) + "_"+str(year1-1870)
-                relative_order = 0 
-                for year2 in range(year1+2, 2022):
-                    gindex, sindex = predicates.index(">"), predicates.index("<")
-                    new_predicates = predicates.replace(predicates[gindex:gindex+6], ">,"+str(min(year1, year2)))
-                    new_predicates = new_predicates.replace(predicates[sindex:sindex+6], "<,"+str(max(year1, year2)))
-                    new_rows.append([row["tables"], row["joins"], new_predicates, None])        
-                    new_rows_with_years.append([row["tables"], row["joins"], new_predicates, sub_base_predicates, "range", year1, year2, relative_order])
+            for year1 in range(1880, 2022, 2):
+                sub_base_predicates = str(base_predicates) + "_" + str(year1 - 1880)
+                relative_order = 0
+                for year2 in range(year1 + 2, 2022):
+                    pattern1 = re.compile(r'production_year,>,\d{1,4}')
+                    new_predicates = re.sub(pattern1, 'production,>,' + str(year1), predicates)
+                    pattern2 = re.compile(r'production_year,<,\d{1,4}')
+                    new_predicates = re.sub(pattern2, 'production,<,' + str(year2), new_predicates)
+                    new_rows.append([row["tables"], row["joins"], new_predicates, None])
+                    new_rows_with_years.append(
+                        [row["tables"], row["joins"], new_predicates, sub_base_predicates, "range", year1, year2,
+                         relative_order])
                     relative_order += 1
-        
-        elif ">" in predicates:
-            index = predicates.index(">")
-            for year in range(1870, 2022):
-                new_predicates = predicates.replace(predicates[index:index+6], ">,"+str(year))
-                new_rows.append([row["tables"], row["joins"], new_predicates, None])
-                new_rows_with_years.append([row["tables"], row["joins"], new_predicates, base_predicates, ">",  year, 10000, 2022-year])
-        elif "<" in predicates:
-            index = predicates.index("<")
-            for year in range(1870, 2022):
-                new_predicates = predicates.replace(predicates[index:index+6], "<,"+str(year))
-                new_rows.append([row["tables"], row["joins"], new_predicates, None])
-                
-                new_rows_with_years.append([row["tables"], row["joins"], new_predicates, base_predicates, "<", 0, year , year-1870+1])
-        elif "=" in predicates:
-            index = predicates.index("=")
-            for year in range(1870, 2022):
-                new_predicates = predicates.replace(predicates[index:index+6], "=,"+str(year))
-                new_rows.append([row["tables"], row["joins"], new_predicates, None])
-                new_rows_with_years.append([row["tables"], row["joins"], new_predicates, base_predicates,"=", year, year, year-1870+1])
-        
-    return new_rows, new_rows_with_years
 
+        elif ">" in predicates:
+            for year in range(1880, 2022):
+                pattern = re.compile(r'production_year,>,\d{1,4}')
+                new_predicates = re.sub(pattern, 'production,>,' + str(year), predicates)
+
+                new_rows.append([row["tables"], row["joins"], new_predicates, None])
+                new_rows_with_years.append(
+                    [row["tables"], row["joins"], new_predicates, base_predicates, ">", year, 10000, 2022 - year])
+        elif "<" in predicates:
+            for year in range(1880, 2022):
+                pattern = re.compile(r'production_year,<,\d{1,4}')
+                new_predicates = re.sub(pattern, 'production,<,' + str(year), predicates)
+                new_rows.append([row["tables"], row["joins"], new_predicates, None])
+
+                new_rows_with_years.append(
+                    [row["tables"], row["joins"], new_predicates, base_predicates, "<", 0, year, year - 1880 + 1])
+        elif "=" in predicates:
+            for year in range(1880, 2022):
+                pattern = re.compile(r'production_year,=,\d{1,4}')
+                new_predicates = re.sub(pattern, 'production,=,' + str(year), predicates)
+                new_rows.append([row["tables"], row["joins"], new_predicates, None])
+
+                new_rows_with_years.append(
+                    [row["tables"], row["joins"], new_predicates, base_predicates, "=", year, year, year - 1880 + 1])
+
+    return new_rows, new_rows_with_years
 
 def get_cmp(df):
     # df is well ordered
