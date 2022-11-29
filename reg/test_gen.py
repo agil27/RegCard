@@ -19,9 +19,9 @@ def generate_new_line(row, base_predicates):
                 relative_order = 0
                 for year2 in range(year1 + 2, 2022):
                     pattern1 = re.compile(r'production_year,>,\d{1,4}')
-                    new_predicates = re.sub(pattern1, 'production,>,' + str(year1), predicates)
+                    new_predicates = re.sub(pattern1, 'production_year,>,' + str(year1), predicates)
                     pattern2 = re.compile(r'production_year,<,\d{1,4}')
-                    new_predicates = re.sub(pattern2, 'production,<,' + str(year2), new_predicates)
+                    new_predicates = re.sub(pattern2, 'production_year,<,' + str(year2), new_predicates)
                     new_rows.append([row["tables"], row["joins"], new_predicates, None])
                     new_rows_with_years.append(
                         [row["tables"], row["joins"], new_predicates, sub_base_predicates, "range", year1, year2,
@@ -31,7 +31,7 @@ def generate_new_line(row, base_predicates):
         elif ">" in predicates:
             for year in range(1880, 2022):
                 pattern = re.compile(r'production_year,>,\d{1,4}')
-                new_predicates = re.sub(pattern, 'production,>,' + str(year), predicates)
+                new_predicates = re.sub(pattern, 'production_year,>,' + str(year), predicates)
 
                 new_rows.append([row["tables"], row["joins"], new_predicates, None])
                 new_rows_with_years.append(
@@ -39,7 +39,7 @@ def generate_new_line(row, base_predicates):
         elif "<" in predicates:
             for year in range(1880, 2022):
                 pattern = re.compile(r'production_year,<,\d{1,4}')
-                new_predicates = re.sub(pattern, 'production,<,' + str(year), predicates)
+                new_predicates = re.sub(pattern, 'production_year,<,' + str(year), predicates)
                 new_rows.append([row["tables"], row["joins"], new_predicates, None])
 
                 new_rows_with_years.append(
@@ -47,7 +47,7 @@ def generate_new_line(row, base_predicates):
         elif "=" in predicates:
             for year in range(1880, 2022):
                 pattern = re.compile(r'production_year,=,\d{1,4}')
-                new_predicates = re.sub(pattern, 'production,=,' + str(year), predicates)
+                new_predicates = re.sub(pattern, 'production_year,=,' + str(year), predicates)
                 new_rows.append([row["tables"], row["joins"], new_predicates, None])
 
                 new_rows_with_years.append(
