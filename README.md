@@ -45,7 +45,7 @@ For the first half of our project, we mainly focus on implementing a cardinality
 
 ### Modeling and featurization
 
-We used the open source code from [Thomas Kipf, et al.](https://github.com/andreaskipf/learnedcardinalities). In the paper, the author proposed multi-set convolutional network(MSCN) for cardinality estimation. The input features for this model are all one-hot encoded, including:
+We used the open source code from [Andreas Kipf, et al.](https://github.com/andreaskipf/learnedcardinalities). In the paper, the author proposed multi-set convolutional network(MSCN) for cardinality estimation. The input features for this model are all one-hot encoded, including:
 
 - tables selected from
 - join predicates (which is encoded through the tables joined and the join condition)
