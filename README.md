@@ -220,11 +220,11 @@ $$
 
 where $D(X, Y)$ is the Jaccard distance $$D(X,Y) = (X - Y) / (X \cup Y) $$ where $X$ and $Y$ are predicate ranges $X=[a,b]$ and $Y=[c,d]$, and $$D(f(X), f(Y)) = (f(X) - f(Y)) / (\text{max}(f(X), f(Y))$$ for the cardinality estimations. The $c$-sigmoid function is a soften-version of sign function: $$\text{c-sigmoid}(x) = \frac{1}{1 + e^{-cx}}$$ when $c$ is something much larger than 1.
 
-The basic idea is to penalize the difference between the since of $f(X) - f(Y)$ and $X - Y$. The Jaccard distance comes in handy when $X$ and $Y$ are on a much crazier scale than $f(X), f(Y)$, vice versa. We can also replace Jaccard distance with simple $X - Y$.
+The basic idea is to penalize the difference between the sign of $f(X) - f(Y)$ and $X - Y$. The Jaccard distance comes in handy when $X$ and $Y$ are on a much crazier scale than $f(X), f(Y)$, vice versa. We can also replace Jaccard distance with simple $X - Y$.
 
 We also plan to experiment with other models like tree models.
 ## TODOs
-- [ ] modify the MSCN model to include the regularization terms
+- [x] modify the MSCN model to include the regularization terms
 - [ ] train `RandomForest` and `XGBoost` models to evaluate
 - [ ] scale up to even larger workloads using advanced sampling from the max-scale `job-cmp` covering a wide range of monotonicity constraints
 - [ ] check code to comply with latest `PyTorch` features and save model parameters

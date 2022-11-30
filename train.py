@@ -33,12 +33,27 @@ def qerror_loss(preds, targets, min_val, max_val):
 
 
 def jaccard_distance(range1, range2):
-    # we know one range is no less than the other
-    lo1, hi1 = range1
-    lo2, hi2 = range2
-    size1 = hi1 - lo1 + 1
-    size2 = hi2 - lo2 + 1
-    return (size1 - size2) / max(size1, size2)
+    if type(range1) == tuple and type(range2) == tuple:
+        # we know one range is no less than the other
+        lo1, hi1 = range1
+        lo2, hi2 = range2
+        size1 = hi1 - lo1 + 1
+        size2 = hi2 - lo2 + 1
+        return (size1 - size2) / max(size1, size2)
+    else:  # ranges are numerical
+        return (range1 - range2) / max(range1, range2)
+
+
+def diff_distance(range1, range2):
+    if type(range1) == tuple and type(range2) == tuple:
+        # we know one range is no less than the other
+        lo1, hi1 = range1
+        lo2, hi2 = range2
+        size1 = hi1 - lo1 + 1
+        size2 = hi2 - lo2 + 1
+        return size1 - size2
+    else:  # ranges are numerical
+        return range1 - range2
 
 
 # https://stackoverflow.com/questions/51976461/optimal-way-of-defining-a-numerically-stable-sigmoid-function-for-a-list-in-pyth
@@ -50,17 +65,21 @@ def stable_soften_sign(num, soften):
         return np.exp(prod)/(1 + np.exp(prod))
 
 
-def monotonic_regularization(mono_preds, predicate_ranges, mono_constraints, lbda, soften):
+def monotonic_regularization(mono_preds, predicate_ranges, mono_constraints, lbda, dist, soften):
     regs = []
     for constraint in mono_constraints:
         left, right = constraint
         if 0 <= left < len(mono_preds) and 0 <= right <= len(mono_preds):
-            d = jaccard_distance(predicate_ranges[left], predicate_ranges[right])
-            if d == 0:
+            if dist == 'jaccard':
+                true_dist = jaccard_distance(predicate_ranges[left], predicate_ranges[right])
+                pred_dist = jaccard_distance(mono_preds[left], mono_preds[right])
+            elif dist == 'diff':
+                true_dist = diff_distance(predicate_ranges[left], predicate_ranges[right])
+                pred_dist = diff_distance(mono_preds[left], mono_preds[right])
+            if true_dist == 0:
                 regs.append(0)
             else:
-                pred_dist = mono_preds[left] - mono_preds[right]
-                regs.append(lbda*(stable_soften_sign(pred_dist, soften) - stable_soften_sign(d, soften))**2)
+                regs.append(lbda*(stable_soften_sign(pred_dist, soften) - stable_soften_sign(true_dist, soften))**2)
     return torch.mean(torch.FloatTensor(regs))
 
 
@@ -107,7 +126,8 @@ def print_qerror(preds_unnorm, labels_unnorm):
     print("Mean: {}".format(np.mean(qerror)))
 
 
-def train_and_predict(workload_name, num_queries, num_epochs, batch_size, hid_units, cuda, cmp=False, lbda=0.0, soften=1.0):
+def train_and_predict(workload_name, num_queries, num_epochs, batch_size, hid_units, cuda, cmp=False,
+    lbda=0.0, dist='jaccard', soften=1.0):
     random.seed(10)
     np.random.seed(10)
 
@@ -166,7 +186,7 @@ def train_and_predict(workload_name, num_queries, num_epochs, batch_size, hid_un
                 qerror = qerror_loss(outputs, targets.float(), min_val, max_val)
                 constraint_batch = random.sample(monotonic_constraints, k=batch_size)
                 mono_reg = monotonic_regularization(
-                    mono_pred_unnorm, predicate_ranges, constraint_batch, lbda, soften)
+                    mono_pred_unnorm, predicate_ranges, constraint_batch, lbda, dist, soften)
                 loss = qerror + mono_reg
             loss_total += loss.item()
             loss.backward()
@@ -247,9 +267,13 @@ def main():
     parser.add_argument("--cuda", help="use CUDA", action="store_true")
     parser.add_argument("--cmp", help="whether to perform MonoM evaluation", action="store_true")
     parser.add_argument("--lbda", help="monotonicity regularization strength (default: 0)", type=float, default=0.0)
+    parser.add_argument("--dist", help="distance between two cardinalities", type=str, default='jaccard', choices=['jaccard', 'diff'])
     parser.add_argument("--soften", help="constant for soften sign function (default: 100)", type=float, default=100)
     args = parser.parse_args()
-    train_and_predict(args.testset, args.queries, args.epochs, args.batch, args.hid, args.cuda, args.cmp, args.lbda, args.soften)
+    train_and_predict(
+        args.testset, args.queries, args.epochs, args.batch, args.hid, args.cuda, args.cmp,
+        args.lbda, args.dist, args.soften
+    )
 
 
 if __name__ == "__main__":
