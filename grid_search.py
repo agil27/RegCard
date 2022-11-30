@@ -17,6 +17,19 @@ def save_counter(counter):
         pickle.dump(counter, fout)
 
 
+def wrapper_train_and_predict(workload_name, num_queries, num_epochs, batch_size, hid_units, cuda, cmp,
+    lbda, regbatch, dist, soften, log_dir):
+
+    cmd = "python3 train.py {} --queries {} --epochs {} --batch {} --hid {} --cuda --cmp --lbda {} --log {}".format(
+        workload_name, num_queries, num_epochs, batch_size, hid_units, lbda, log_dir
+    )
+
+    if lbda != 0.0:
+        cmd += " --regbatch {} --dist {} --soften {}".format(regbatch, dist, soften)
+    
+    print(cmd)
+
+
 if __name__ == "__main__":
 
     queries = 50000
@@ -42,7 +55,7 @@ if __name__ == "__main__":
 
             if lbda == 0.0:
                 if curr_counter >= counter:
-                    train_and_predict(testset, queries, epochs, batch, hid, True, True,
+                    wrapper_train_and_predict(testset, queries, epochs, batch, hid, True, True,
                         lbda, None, None, None, log)
                 curr_counter += 1
                 if curr_counter > counter:
@@ -51,18 +64,10 @@ if __name__ == "__main__":
             else:
                 for dist in dists:
 
-                    if dist == 'jaccard':
-                        for soften in softens:
-                            if curr_counter >= counter:
-                                train_and_predict(testset, queries, epochs, batch, hid, True, True,
-                                    lbda, regbatch, dist, soften, log)
-                            curr_counter += 1
-                            if curr_counter > counter:
-                                save_counter(curr_counter)
-                    else:
+                    for soften in softens:
                         if curr_counter >= counter:
-                            train_and_predict(testset, queries, epochs, batch, hid, True, True,
-                                    lbda, regbatch, dist, None, log)
+                            wrapper_train_and_predict(testset, queries, epochs, batch, hid, True, True,
+                                lbda, regbatch, dist, soften, log)
                         curr_counter += 1
                         if curr_counter > counter:
                             save_counter(curr_counter)
