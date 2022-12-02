@@ -27,7 +27,7 @@ def wrapper_train_and_predict(workload_name, num_queries, num_epochs, batch_size
     if lbda != 0.0:
         cmd += " --regbatch {} --dist {} --soften {}".format(regbatch, dist, soften)
     
-    print(cmd)
+    os.system(cmd)
 
 
 if __name__ == "__main__":

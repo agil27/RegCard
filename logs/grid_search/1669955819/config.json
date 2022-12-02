@@ -1,0 +1,12 @@
+{
+  "testset": "job-cmp-card",
+  "num_train_queries": 50000,
+  "epochs": 50,
+  "batch_size": 1024,
+  "num_hidden_units": 512,
+  "cuda": true,
+  "lbda": 3.0,
+  "regbatch": 1024,
+  "reg_dist_metric": "jaccard",
+  "soften": 10.0
+}
