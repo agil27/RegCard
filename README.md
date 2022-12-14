@@ -1,4 +1,4 @@
-# RegCard
+# RegCard (Course Project for MIT 6.5830)
 Learned Cardinalities Estimation with Regularities
 
 *Yuanbiao Wang, Ziye Tao, Vic Feng*
